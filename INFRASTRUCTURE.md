@@ -29,7 +29,7 @@
 | deskcommcrm-srh-1 | Up 3d | — |
 | deskcommcrm-waha-1 | Up 3d | 3000 |
 | deskcommcrm-redis-1 | Up 3d (healthy) | 6379 |
-| hermes-agent | Up 11m | — |
+| hermes-agent | Up 14 hours | — |
 
 ## Proxy reverso
 
@@ -57,5 +57,5 @@
 
 ## Uptime
 
-- OmniRoute online há ~19h (segundo memória anterior)
+|- **OmniRoute:** online há 3D, pid 33002, 39.1MB, root
 - DeskcommCRM containers up há 3 dias

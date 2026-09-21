@@ -15,6 +15,9 @@ Data | Decisão | Rationale | Status
 2026-09-20 | Cron de checkpoint a cada 2 dias | Avaliar andamento, sugerir próximos passos sem sobrecarga | 🔜 Criar
 2026-09-20 | Cron de manutenção do Second Brain | Análise semanal da implementação e manutenção do repositório | 🔜 Criar
 
+2026-09-21 | Verificação do OmniRoute: config dir existe e está funcional | `/root/.omniroute/` contém `.env` e `storage.sqlite`; PM2 online com pid 33002, uptime 3D, 39.1MB | ✅ Confirmado
+2026-09-21 | Verificação dos containers DeskcommCRM | Todos os 8 containers up (3 dias), saúde ok, ports conforme esperado | ✅ Confirmado
+
 ## Próximas decisões a tomar
 
 1. **Anthropic vs OpenRouter como provider principal** — decidir após adquirir ANTHROPIC_API_KEY

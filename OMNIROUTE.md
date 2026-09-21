@@ -2,11 +2,11 @@
 
 ## Status
 
-- **Versão:** v3.8.50 (ou superior — verifique com `omniroute --version`)
-- **Processo:** PM2 (id 0, nome `omniroute`), online
-- **Porta:** 20128
-- **Data dir:** `/root/.omniroute/` — database 5.8 MB
-- **Config dir:** *não encontrado* — verificar se há configuração faltando
+|- **Versão:** v3.8.50
+|- **Processo:** PM2 (id 0, nome `omniroute`), online, pid 33002, uptime 3D, 39.1MB, root
+|- **Porta:** 20128
+|- **Data dir:** `/root/.omniroute/` — database 5.8 MB
+|- **Config dir:** `/root/.omniroute/` — existe `.env` e `storage.sqlite` (verificado 2026-09-21)
 
 ## Providers ativos
 
