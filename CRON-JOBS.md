@@ -19,12 +19,12 @@
 
 ## Hermes (Windows, agente)
 
-### 3. Checkpoint Semanal do Projeto (pending)
-- **Schedule:** Cada 2 dias
+### 3. Checkpoint Semanal do Projeto
+- **Schedule:** Cada 2 dias (cron ativo)
 - **Para:** Ler PENDING-TASKS.md, INFRASTRUCTURE.md, CONFIGURACAO-DESKCOMMCRM.md e sugerir proximos passos
-- **Status:** 🔜 Criar via cronjob_manage
+- **Status:** ✅ Ativo — rodando como cron job no Hermes
 
-### 4. Manutencao do Second Brain (pending)
-- **Schedule:** Semanal
+### 4. Manutencao do Second Brain
+- **Schedule:** Semanal (cron ativo)
 - **Para:** Analisar se o repositorio esta atualizado, se documentos refletem estado real, sugerir melhorias na estrutura
-- **Status:** 🔜 Criar via cronjob_manage
+- **Status:** ✅ Ativo — esta execucao e o proprio cron job

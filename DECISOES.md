@@ -23,3 +23,8 @@ Data | Decisão | Rationale | Status
 1. **Anthropic vs OpenRouter como provider principal** — decidir após adquirir ANTHROPIC_API_KEY
 2. **Investir em JEV/TypeSafe?** — esperar estabilidade, validar caso de uso de classificação
 3. **Schema de valores para venda do serviço** — instalação fixa + manutenção mensal
+
+---
+
+### 2026-09-28 | Cron de Checkpoint Semanal ativo | Implementado via cron job no Hermes Agent | ✅ Implementado
+### 2026-09-28 | Cron de Manutenção do Second Brain ativo | Execução semanal de verificação do repositório | ✅ Implementado
