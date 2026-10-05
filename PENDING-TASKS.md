@@ -31,7 +31,7 @@ Priorizadas. Atualizar conforme avança.
 
 ## 📋 DO SECOND BRAIN
 
-- [ ] Manter este repositório atualizado
+- [x] Manter este repositório atualizado
 - [x] Checkpoint seminal (cron) lê e atualiza PENDING-TASKS.md
 - [x] Documentar cada decisão em DECISOES.md
 - [ ] Configurar cron job de manutenção do Second Brain (cron ativo)
