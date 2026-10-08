@@ -1,12 +1,14 @@
 # OmniRoute — AI Gateway
 
-## Status
+## Status (2026-10-08)
 
-|- **Versão:** v3.8.50
-|- **Processo:** PM2 (id 0, nome `omniroute`), online, pid 33002, uptime 3D, 39.1MB, root
-|- **Porta:** 20128
-|- **Data dir:** `/root/.omniroute/` — database 5.8 MB
-|- **Config dir:** `/root/.omniroute/` — existe `.env` e `storage.sqlite` (verificado 2026-09-21)
+- **Versão:** v3.8.50
+- **Processo:** PM2 (id 0, nome `omniroute`), online, pid 341295, uptime 6D, 27.9MB, root, 0 restarts
+- **Porta:** 20128 — escutando em `0.0.0.0` (⚠️ acessível da internet, ver PENDING-TASKS segurança)
+- **Data dir:** `/root/.omniroute/` — database 5.8 MB
+- **Config dir:** `/root/.omniroute/` — existe `.env` e `storage.sqlite` (verificado 2026-09-21)
+- **Script path:** `/usr/bin/omniroute`, exec cwd `/root`, Node v22.23.3
+- **HTTP:** responde na porta 20128 (dashboard web Next.js funcional)
 
 ## Providers ativos
 

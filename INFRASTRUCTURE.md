@@ -17,24 +17,34 @@
 
 - **omniroute:** online, pid 33002, uptime 3D, 16.2MB, root
 
-## Docker — containers do DeskcommCRM
+## Docker — containers do DeskcommCRM (verificado 2026-10-08)
+
+**Versão do DeskcommCRM: 1.76.0** (era 1.27.1 em 2026-09-20 — upgrade de 49 patch versions)
 
 | Container | Status | Ports |
 |---|---|---|
-| traefik | Up 31h | 18080→80, 18443→443 |
-| deskcommcrm-caddy-1 | Up 3d | 80→80, 443→443, 443/udp, 2019 |
-| deskcommcrm-scheduler-1 | Up 3d (healthy) | — |
-| deskcommcrm-worker-1 | Up 3d (healthy) | 8787 |
-| deskcommcrm-app-1 | Up 3d (healthy) | 3000 |
-| deskcommcrm-srh-1 | Up 3d | — |
-| deskcommcrm-waha-1 | Up 3d | 3000 |
-| deskcommcrm-redis-1 | Up 3d (healthy) | 6379 |
-| hermes-agent | Up 14 hours | — |
+| deskcommcrm-caddy-1 | Up 15h | 80→80, 443→443, 443/udp, 2019 |
+| deskcommcrm-scheduler-1 | Up 15h (healthy) | — |
+| deskcommcrm-worker-1 | Up 15h (healthy) | 8787 |
+| deskcommcrm-app-1 | Up 15h (healthy) | 3000 |
+| deskcommcrm-waha-1 | Up 2d | 3000 |
+| deskcommcrm-redis-1 | Up 7d (healthy) | 6379 |
+| deskcommcrm-srh-1 | Up 7d | — |
+
+⚠️ **Traefik e hermes-agent não aparecem mais** em `docker ps` — o Traefik (serviço Hostinger/Coolify) foi removido ou parado; o hermes-agent também não está rodando como container. Confirmar se era intencional.
+
+## Backups (novo)
+
+- `0 3 * * *` → `bash hostgator-setup-kit/backup.sh` — backup local diário em `/opt/DeskcommCRM/backups/`
+  - Gera `db-YYYYmmdd-HHMMSS.sql.gz` (~6MB) e `waha-*.tgz` (~1.3MB), mantém 14 cópias (~83MB total)
+- `40 3 * * *` → `/opt/backup-b2.sh` — cópia offsite para Backblaze B2
+
+Último backup concluído com sucesso em 2026-10-08 03:02.
 
 ## Proxy reverso
 
 - **Caddy** (Docker) — porta 80/443, TLS automático via Let's Encrypt
-- **Traefik** (Docker, existente) — porta 18080→80, 18443→443 (serviço Hostinger/Coolify)
+- **Traefik** (Docker) — **NÃO ESTÁ MAIS RODANDO** (ausente do `docker ps` em 2026-10-08)
 - **Nginx:** inativo
 
 ## Rede Docker
@@ -51,11 +61,18 @@
 ## Crontab (VPS)
 
 ```
-*/5 * * * * cd /opt/DeskcommCRM && bash hostgator-setup-kit/agent.sh >/dev/null 2>&1
-* * * * * curl -fsS -H "Authorization: Bearer 5b855a...914c" "https://secretariaborges.duckdns.org/api/v1/cron/event-log-drain" >/dev/null 2>&1
+0 3 * * *   cd /opt/DeskcommCRM && bash hostgator-setup-kit/backup.sh   # backup local diário
+40 3 * * *  /opt/backup-b2.sh                                           # backup offsite B2
+*/5 * * * * cd /opt/DeskcommCRM && bash hostgator-setup-kit/agent.sh     # agent de manutenção
+* * * * *   curl -fsS -H @"/opt/DeskcommCRM/.env.cron-drain" "https://secretariaborges.duckdns.org/api/v1/cron/event-log-drain"
 ```
+
+Além disso, o container **scheduler** roda ~15 crons internos (agent-dispatcher, followup-flow-worker, campaign-worker, routing-worker, webhook-replay, channel-health, contact-avatars, storage-redaction, snooze-watcher, handoff-devolucao, proposta-travada, recover-stuck-messages, prospecting) via `crond` contra `http://app:3000/api/v1/cron/*` com `Authorization: Bearer $INTERNAL_CRON_SECRET`.
 
 ## Uptime
 
-|- **OmniRoute:** online há 3D, pid 33002, 39.1MB, root
-- DeskcommCRM containers up há 3 dias
+- **OmniRoute:** online há 6D, pid 341295, 27.9MB, root, 0 restarts
+- **DeskcommCRM:** containers up há 15h (app/worker/scheduler/caddy) — provavelmente restart após upgrade para 1.76.0
+- VPS: up há 7d 9h, load 0.03
+- Disco: 27G/49G (58%)
+- Memória: 1.1Gi/1.7Gi usados, 588Mi disponível, swap 1.0Gi/2.0Gi usado

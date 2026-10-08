@@ -1,6 +1,6 @@
 # Configuracao — DeskcommCRM (.env)
 
-Extraido do `/opt/DeskcommCRM/.env` (2026-09-20).
+Extraido do `/opt/DeskcommCRM/.env` (2026-09-20, reverificado 2026-10-08).
 
 > **Aviso:** Este arquivo contem apenas metadados e status das chaves. Valores reais dos secrets ficam apenas no .env do VPS, nunca aqui.
 
@@ -27,9 +27,9 @@ Extraido do `/opt/DeskcommCRM/.env` (2026-09-20).
 | WAHA_API_KEY | **** (ver .env real no VPS) | **SECRETO** |
 | UPSTASH_REDIS_REST_URL | http://srh:80 | Interno Docker |
 | UPSTASH_REDIS_REST_TOKEN | **** (ver .env real no VPS) | **SECRETO** |
-| APP_IMAGE | ghcr.io/melgarafael/deskcommcrm:1.27.1 | |
-| WORKER_IMAGE | ghcr.io/melgarafael/deskcomm-worker:1.27.1 | |
-| SCHEDULER_IMAGE | ghcr.io/melgarafael/deskcomm-scheduler:1.27.1 | |
+| APP_IMAGE | ghcr.io/melgarafael/deskcommcrm:1.76.0 | (era 1.27.1 — upgrade feito fora do Second Brain) |
+| WORKER_IMAGE | ghcr.io/melgarafael/deskcomm-worker:1.76.0 | |
+| SCHEDULER_IMAGE | ghcr.io/melgarafael/deskcomm-scheduler:1.76.0 | |
 | INTERNAL_SECRET | **** (ver .env real no VPS) | **SECRETO** |
 | INTERNAL_CRON_SECRET | **** (ver .env real no VPS) | **SECRETO** |
 | WHATSAPP_RESTART_ALL_SESSIONS | True | |
@@ -54,11 +54,12 @@ Extraido do `/opt/DeskcommCRM/.env` (2026-09-20).
 
 ## Observacoes
 
-- **AI_PROVIDER=anthropic** mas **ANTHROPIC_API_KEY** esta vazio → a IA pode estar caindo em fallback (OPENROUTER_API_KEY preenchido)
-- **OPENROUTER_API_KEY** esta preenchido — prova de conceito funcional
+- **`AI_PROVIDER=anthropic` sem `ANTHROPIC_API_KEY`** → mas o worker está chamando LLM de verdade (30x/24h `openai/gpt-4o` + 15x/24h `anthropic`). **As credenciais NÃO estão no `.env` raiz** — vêm da configuração da organização no Supabase. Isso é uma divergência importante: a tabela acima não reflete onde a chave realmente está.
+- **OPENROUTER_API_KEY** está preenchido — usado pelo sync de catálogo (467 modelos sincronizados em 2026-10-08 04:15)
 - **Resend** sem chave = e-mails transacionais desligados (convite mostra link na tela)
-- **Google Calendar** sem client ID/secret = integracao de agenda desligada
-- **VAPID** vazios = Web Push apenas com site aberto (sem notificacao na bandeja)
+- **Google Calendar** sem client ID/secret = integração de agenda desligada
+- **VAPID** vazios = Web Push apenas com site aberto (sem notificação na bandeja)
+- **Sistema está em produção** apesar de várias chaves "faltando" — ver DECISOES.md 2026-10-08
 
 ## AÇÃO: Preencher as chaves 🔴
 
